@@ -32,6 +32,26 @@ export function selectChapters(input: string, chapters: TChapter[]) {
         : chapters
 }
 
+/**
+ * 将 Windows 文件和文件夹名称不允许的特殊字符替换为合法字符。
+ *
+ * 超长目录名会在 Linux 上创建失败，这里限制最长 85
+ */
+export function normalizeName(s: string) {
+    return s
+        .trim()
+        .replace(/\//g, '／')
+        .replace(/\\/g, '＼')
+        .replace(/\?/g, '？')
+        .replace(/\|/g, '︱')
+        .replace(/"/g, '＂')
+        .replace(/\*/g, '＊')
+        .replace(/</g, '＜')
+        .replace(/>/g, '＞')
+        .replace(/:/g, '-')
+        .slice(0, 85)
+}
+
 export const log = {
     log: (...msg: unknown[]) => console.log(...msg),
     info: (...msg: unknown[]) => console.log(pico.cyan('→'), ...msg),

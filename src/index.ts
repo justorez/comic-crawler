@@ -2,7 +2,7 @@ import axios from 'axios'
 import * as cheerio from 'cheerio'
 import fs from 'fs/promises'
 import path from 'path'
-import { log, selectChapters } from './utils'
+import { log, normalizeName, selectChapters } from './utils'
 import pico from 'picocolors'
 import ora from 'ora'
 import ProgressBar from 'progress'
@@ -69,7 +69,12 @@ async function downloadChapter(chapter: TChapter, comicTitle: string) {
                 responseType: 'arraybuffer'
             })
 
-            const dir = path.resolve(process.cwd(), 'comics', comicTitle, title)
+            const dir = path.resolve(
+                process.cwd(),
+                'comics',
+                comicTitle,
+                normalizeName(title)
+            )
             await fs.mkdir(dir, { recursive: true })
 
             const index = String(i + 1).padStart(maxPad, '0')
