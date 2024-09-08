@@ -1,7 +1,7 @@
 {
-  "name": "toptoonplus-crawler",
+  "name": "jiuyao-crawler",
   "version": "1.0.0",
-  "description": "A image crawler",
+  "description": "A comic crawler",
   "packageManager": "pnpm@9.0.0",
   "type": "module",
   "source": "src/index.ts",
