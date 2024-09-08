@@ -22,12 +22,6 @@ export default defineConfig({
             entryFileNames: '[name].mjs',
             format: 'es',
             sourcemap: true
-        },
-        {
-            dir: 'dist',
-            entryFileNames: '[name].cjs',
-            format: 'cjs',
-            sourcemap: true
         }
     ],
     external: [

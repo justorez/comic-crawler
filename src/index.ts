@@ -2,7 +2,7 @@ import axios from 'axios'
 import * as cheerio from 'cheerio'
 import fs from 'fs/promises'
 import path from 'path'
-import { log } from './utils'
+import { log, selectChapters } from './utils'
 import pico from 'picocolors'
 import ora from 'ora'
 import ProgressBar from 'progress'
@@ -34,11 +34,6 @@ async function parseChapters(url: string) {
         title,
         chapters
     }
-}
-
-type TChapter = {
-    url: string
-    title: string
 }
 
 async function downloadChapter(chapter: TChapter, comicTitle: string) {
@@ -89,14 +84,19 @@ async function downloadChapter(chapter: TChapter, comicTitle: string) {
 }
 
 async function main() {
-    const url = process.env.COMIC_URL || process.argv[2]
+    const { COMIC_URL, COMIC_CHAPTER } = process.env
+
+    const url = COMIC_URL || process.argv[2]
     if (!url) return
 
     const { chapters, title } = await parseChapters(url)
+    const selectedChapters = selectChapters(COMIC_CHAPTER || '', chapters)
 
-    log.info(`${title} 查询到 ${pico.cyan(chapters.length)} 个待下载章节`)
+    log.info(
+        `${title} 查询到 ${pico.cyan(selectedChapters.length)} 个待下载章节`
+    )
 
-    for (const ch of chapters) {
+    for (const ch of selectedChapters) {
         await downloadChapter(ch, title)
     }
 }
