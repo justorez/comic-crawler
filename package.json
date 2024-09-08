@@ -1,0 +1,102 @@
+{
+  "name": "ts-starter",
+  "version": "1.0.0",
+  "description": "Template",
+  "packageManager": "pnpm@8.15.6",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "postinstall": "simple-git-hooks",
+    "dev": "tsx src/index.ts",
+    "build": "rimraf dist && rollup -c && pnpm build:dts",
+    "build:dts": "rimraf temp && tsc -p tsconfig.build.json && rollup -c rollup.dts.config.js",
+    "clean": "rimraf dist temp .eslintcache .stats",
+    "test": "vitest",
+    "pub": "pnpm build && pnpm publish --no-git-checks",
+    "check": "tsc --incremental --noEmit",
+    "lint": "eslint --cache --ignore-path .gitignore .",
+    "lint:fix": "eslint --cache --fix --ignore-path .gitignore .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "commit": "cz"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "pnpm commitlint --edit $1"
+  },
+  "lint-staged": {
+    "*.{json,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{js,cjs,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justorez/node-ts-starter.git"
+  },
+  "keywords": [],
+  "author": "justorez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justorez/node-ts-starter/issues"
+  },
+  "homepage": "https://github.com/justorez/node-ts-starter#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "@vitest/ui": "^1.5.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^16.4.1",
+    "esbuild": "^0.20.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "fs-extra": "^11.2.0",
+    "lint-staged": "^15.2.1",
+    "picocolors": "^1.0.0",
+    "prettier": "^3.2.4",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "simple-git-hooks": "^2.9.0",
+    "tsx": "^4.7.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.5.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

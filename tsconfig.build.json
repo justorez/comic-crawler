@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "temp",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "stripInternal": true
+  },
+  "exclude": ["**/__tests__"]
+}
