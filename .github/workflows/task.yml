@@ -1,0 +1,51 @@
+name: task
+
+on:
+  workflow_dispatch:
+    inputs:
+      COMIC_URL:
+        description: '漫画主页地址'
+        type: string
+      OUTPUT_ZIP:
+        description: '每个章节打成独立压缩包'
+        type: boolean
+        default: true
+
+env:
+  COMIC_URL: ${{ inputs.COMIC_URL }}
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install deps
+        run: |
+          pnpm install
+
+      - name: Download
+        run: pnpm dev
+
+      - name: Compress
+        if: inputs.OUTPUT_ZIP
+        run: pnpm dev:zip
+
+      - name: Upload to github
+        uses: actions/upload-artifact@v4
+        with:
+          name: comics
+          path: ${{ inputs.OUTPUT_ZIP && 'comics-zip/' || 'comics/' }}
+          retention-days: 3

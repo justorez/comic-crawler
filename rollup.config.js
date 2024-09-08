@@ -13,7 +13,8 @@ const pkg = readJsonSync('./package.json')
 // more faster than microbundle
 export default defineConfig({
     input: {
-        index: 'src/index.ts'
+        index: 'src/index.ts',
+        zip: 'src/zip.ts'
     },
     output: [
         {

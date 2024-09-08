@@ -1,5 +1,7 @@
 temp/
 .stats/
+comics
+comics-zip
 
 # Logs
 logs
