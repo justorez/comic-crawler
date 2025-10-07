@@ -12,33 +12,33 @@ const pkg = readJsonSync('./package.json')
 
 // more faster than microbundle
 export default defineConfig({
-    input: {
-        index: 'src/index.ts',
-        zip: 'src/zip.ts'
-    },
-    output: [
-        {
-            dir: 'dist',
-            entryFileNames: '[name].mjs',
-            format: 'es',
-            sourcemap: true
-        }
-    ],
-    external: [
-        ...Object.keys(pkg.dependencies || {}),
-        ...builtinModules,
-        /node:/
-    ],
-    plugins: [
-        json(),
-        esbuild({
-            platform: 'node',
-            minify: true
-        }),
-        nodeResolve(),
-        commonjs(),
-        visualizer({
-            filename: '.stats/stats.html'
-        })
-    ]
+  input: {
+    index: 'src/index.ts',
+    zip: 'src/zip.ts'
+  },
+  output: [
+    {
+      dir: 'dist',
+      entryFileNames: '[name].mjs',
+      format: 'es',
+      sourcemap: true
+    }
+  ],
+  external: [
+    ...Object.keys(pkg.dependencies || {}),
+    ...builtinModules,
+    /node:/
+  ],
+  plugins: [
+    json(),
+    esbuild({
+      platform: 'node',
+      minify: true
+    }),
+    nodeResolve(),
+    commonjs(),
+    visualizer({
+      filename: '.stats/stats.html'
+    })
+  ]
 })
