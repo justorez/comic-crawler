@@ -149,7 +149,9 @@ export async function main(getChapters: GetChapters, getPictures: GetPictures) {
   const { chapters, title } = await parseChapters(url, getChapters)
   const selectedChapters = selectChapters(chapterRange, chapters)
 
-  log.info(`${title} 查询到 ${pico.cyan(selectedChapters.length)} 个待下载章节`)
+  log.info(
+    `${pico.cyan(title)} 查询到 ${pico.cyan(selectedChapters.length)} 个待下载章节`
+  )
 
   for (const ch of selectedChapters) {
     await downloadChapter(ch, title, getPictures)
