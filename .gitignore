@@ -2,6 +2,7 @@ temp/
 .stats/
 comics
 comics-zip
+debug/
 
 # Logs
 logs
