@@ -69,11 +69,12 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/adm-zip": "^0.5.5",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.16.5",
     "@types/progress": "^2.0.7",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@vitest/ui": "^1.6.0",
+    "@vitest/ui": "^3.2.4",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.4.5",
@@ -86,14 +87,14 @@
     "picocolors": "^1.1.0",
     "prettier": "^3.3.3",
     "rimraf": "^5.0.10",
-    "rollup": "^4.21.2",
+    "rollup": "^4.52.4",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-esbuild": "^6.1.1",
     "rollup-plugin-visualizer": "^5.12.0",
     "simple-git-hooks": "^2.11.1",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4",
-    "vitest": "^1.6.0"
+    "vitest": "^3.2.4"
   },
   "config": {
     "commitizen": {

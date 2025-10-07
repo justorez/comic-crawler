@@ -7,6 +7,7 @@ import path from 'path'
 import ora from 'ora'
 import ProgressBar from 'progress'
 import pLimit from 'p-limit'
+import { ChapterType, GetChapters, GetPictures } from './typings'
 
 /**
  * @param input `all` or `1,3,5-20`
