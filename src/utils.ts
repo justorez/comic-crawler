@@ -111,6 +111,10 @@ export async function downloadChapter(
   const limit = pLimit(5)
   const tasks = pictures.map((pic, i) => {
     return limit(async () => {
+      if (!pic) {
+        return bar.tick()
+      }
+
       const res = await axios.get(pic, {
         responseType: 'arraybuffer'
       })
@@ -140,8 +144,10 @@ export async function main(getChapters: GetChapters, getPictures: GetPictures) {
   const url = COMIC_URL || process.argv[2]
   if (!url) return
 
+  const chapterRange = COMIC_CHAPTER || process.argv[3] || 'all'
+
   const { chapters, title } = await parseChapters(url, getChapters)
-  const selectedChapters = selectChapters(COMIC_CHAPTER || '', chapters)
+  const selectedChapters = selectChapters(chapterRange, chapters)
 
   log.info(`${title} 查询到 ${pico.cyan(selectedChapters.length)} 个待下载章节`)
 
